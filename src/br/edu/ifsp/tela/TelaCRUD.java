@@ -12,6 +12,7 @@ import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 public class TelaCRUD extends javax.swing.JFrame {
 
@@ -20,14 +21,14 @@ public class TelaCRUD extends javax.swing.JFrame {
     DateTimeFormatter parser = DateTimeFormatter.ofPattern("dd/MM/uuuu");
     Calendar c = Calendar.getInstance();
 
-    public TelaCRUD() {
+    public TelaCRUD() throws ParseException {
         initComponents();
         atualizarGrid();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents() throws ParseException {
 
         jLabel2 = new javax.swing.JLabel();
         buttonGroup1 = new javax.swing.ButtonGroup();
@@ -48,7 +49,8 @@ public class TelaCRUD extends javax.swing.JFrame {
         radioHomemCadastar = new javax.swing.JRadioButton();
         radioMulherCadastar = new javax.swing.JRadioButton();
         checkGestanteCadastar = new javax.swing.JCheckBox();
-        areaCPFCadastar = new javax.swing.JTextField();
+        MaskFormatter maskCadastrar = new MaskFormatter("###.###.###-##");
+		areaCPFCadastar = new javax.swing.JFormattedTextField(maskCadastrar);
         jComboBoxUFCadastar = new javax.swing.JComboBox<>();
         lblLimparCadastar = new javax.swing.JButton();
         btnCadastrarUsuario = new javax.swing.JButton();
@@ -57,7 +59,8 @@ public class TelaCRUD extends javax.swing.JFrame {
         jLabel64 = new javax.swing.JLabel();
         btnRemover = new javax.swing.JButton();
         lblLimparRemover = new javax.swing.JButton();
-        areaCPFRemover = new javax.swing.JTextField();
+        MaskFormatter maskRemover = new MaskFormatter("###.###.###-##");
+        areaCPFRemover = new javax.swing.JFormattedTextField(maskRemover);
         jLabel69 = new javax.swing.JLabel();
         pnDadosRemover = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -82,7 +85,8 @@ public class TelaCRUD extends javax.swing.JFrame {
         radioHomemAtualizar = new javax.swing.JRadioButton();
         radioMulherAtualizar = new javax.swing.JRadioButton();
         checkGestanteAtualizar = new javax.swing.JCheckBox();
-        areaCPFAtualizar = new javax.swing.JTextField();
+        MaskFormatter maskAtualizar = new MaskFormatter("###.###.###-##");
+        areaCPFAtualizar = new javax.swing.JFormattedTextField(maskAtualizar);
         jComboBoxUFAtualizar = new javax.swing.JComboBox<>();
         btnAtualizar = new javax.swing.JButton();
         limparAtualizar = new javax.swing.JButton();
@@ -739,15 +743,20 @@ public class TelaCRUD extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaCRUD().setVisible(true);
+                try {
+					new TelaCRUD().setVisible(true);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField areaCPFAtualizar;
-    private javax.swing.JTextField areaCPFCadastar;
-    private javax.swing.JTextField areaCPFRemover;
+    private javax.swing.JFormattedTextField areaCPFAtualizar;
+    private javax.swing.JFormattedTextField areaCPFCadastar;
+    private javax.swing.JFormattedTextField areaCPFRemover;
     private javax.swing.JTextField areaNomeAtualizar;
     private javax.swing.JTextField areaNomeCadastar;
     private javax.swing.JButton btnAtualizar;

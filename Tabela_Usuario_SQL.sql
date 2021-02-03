@@ -31,12 +31,12 @@ INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Marcos Fernand
 INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Isadora Daniela Moura",22,"MULHER","913.371.624-26","MG");
 INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Matheus Giovanni Cauã Ferreira",62,"HOMEM","06981065126","MG");
 INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Camila Milena Lorena das Neves",81,"MULHER","461.414.967-76","PA");
-INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Fernando Roberto Barros",11,"HOMEM","oi 058","PA");
-INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Ana Elaine Maitê Souza",10,"MULHER","oi 781","PB");
-INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Thomas Yago Theo da Costa",1,"HOMEM","oi 891","PR");
-INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Pietra Agatha Barbosa",23,"MULHER","oi 130","PR");
-INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Kaique Yago Hugo da Luz",3,"HOMEM","oi 664","PE");
-INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Marcela Lívia da Rosa",8,"MULHER","oi 770","PE");
+INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Fernando Roberto Barros",11,"HOMEM","058.680.878-79","PA");
+INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Ana Elaine Maitê Souza",10,"MULHER","781.891.130-89","PB");
+INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Thomas Yago Theo da Costa",1,"HOMEM","891.320.091-00","PR");
+INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Pietra Agatha Barbosa",23,"MULHER","130.812.345-06","PR");
+INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Kaique Yago Hugo da Luz",3,"HOMEM","664.181.309-60","PE");
+INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Marcela Lívia da Rosa",8,"MULHER","770.723.681-59","PE");
 INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Otávio Francisco Augusto Souza",49,"HOMEM","321.876.196-48","PI");
 INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Marcela Lívia da Rosa",14,"MULHER","321.876.196-48","PI");
 INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Bárbara Sophia Moreira",18,"MULHER","907.061.552-54","RJ");
