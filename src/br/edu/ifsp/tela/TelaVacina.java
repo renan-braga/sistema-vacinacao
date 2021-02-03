@@ -1,7 +1,9 @@
 package br.edu.ifsp.tela;
 
- 
- 
+import java.text.ParseException;
+
+import javax.swing.text.MaskFormatter;
+
 public class TelaVacina extends javax.swing.JFrame {
 
     /**
@@ -20,7 +22,11 @@ public class TelaVacina extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        areaCPFAplicarVacina = new javax.swing.JTextField();
+        try {
+			areaCPFAplicarVacina = new javax.swing.JFormattedTextField(new MaskFormatter("###.###.###-##"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
         jLabel2 = new javax.swing.JLabel();
         lblNomeAplicarVacina = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -377,7 +383,7 @@ public class TelaVacina extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField areaCPFAplicarVacina;
+    private javax.swing.JFormattedTextField areaCPFAplicarVacina;
     private javax.swing.JButton btnAplicarVacina;
     private javax.swing.JButton btnLimparDadosAplicarVacina;
     private javax.swing.JButton btnLimparTabelaAplicarVacina;
