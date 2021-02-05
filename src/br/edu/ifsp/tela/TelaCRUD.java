@@ -110,7 +110,7 @@ public class TelaCRUD extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
@@ -653,7 +653,7 @@ public class TelaCRUD extends javax.swing.JFrame {
         String flagNome = areaNomeCadastar.getText();
         String flagCPF = areaCPFCadastar.getText();
         String flagDataNascimento = txtDataCadastrar.getValue().toString();
-        int flagIdade = 0;
+        int flagIdade = calcularIdade(flagDataNascimento);
         String flagEstado = jComboBoxUFCadastar.getSelectedItem().toString();
         String flagSexo = "HOMEM";
 
@@ -671,8 +671,13 @@ public class TelaCRUD extends javax.swing.JFrame {
         atualizarGrid();
     }//GEN-LAST:event_btnCadastrarUsuarioActionPerformed
 
+    
+    private int calcularIdade(String flagDataNascimento) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+	private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         String flagCPF = areaCPFRemover.getText();
 
         u.setCPF(flagCPF);

@@ -1,6 +1,17 @@
  
 package br.edu.ifsp.tela;
- 
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.text.ParseException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 public class TelaPrincipal extends javax.swing.JFrame {
 
    
@@ -12,14 +23,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+    	
         jFrame1 = new javax.swing.JFrame();
         jMenu1 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jInternalFrame2 = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        String path = FileSystems.getDefault().getPath("").toAbsolutePath()+""+File.separatorChar+"sus-background.jpg";
+        try {
+			jLabel2 = new javax.swing.JLabel(new ImageIcon(ImageIO.read(new File(path))));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -50,14 +66,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel2.setText("INSERIR IMAGEM DO SUS AQUI !!!!!");
-
         jMenu4.setText("File");
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         jMenuItem4.setText("Operações ");
+        jMenuItem4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				jMenuItem4ActionPerformed(evt);
+			}
+		});
         jMenu4.add(jMenuItem4);
 
         jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
@@ -103,29 +120,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
 
         getContentPane().add(jInternalFrame2);
-
+        
+        
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
+	private void jMenuItem4ActionPerformed(ActionEvent evt) {
+		try {
+			new TelaCRUD().setVisible(true);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
+    
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {
+        new TelaHistorico().setVisible(true);
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-                // DESENVOLVER LÓGICA AQUI!!
+    }
 
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {
+        new TelaVacina().setVisible(true);
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-                // DESENVOLVER LÓGICA AQUI!!
+    }
 
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -142,9 +159,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaPrincipal().setVisible(true);
@@ -152,7 +167,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JInternalFrame jInternalFrame2;
@@ -166,5 +180,4 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPopupMenu jPopupMenu1;
-    // End of variables declaration//GEN-END:variables
 }

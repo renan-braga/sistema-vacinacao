@@ -82,7 +82,7 @@ public class TelaVacina extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
@@ -91,9 +91,6 @@ public class TelaVacina extends javax.swing.JFrame {
         areaCPFAplicarVacina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 areaCPFAplicarVacinaActionPerformed(evt);
-                
-                
-                
             }
         });
 
@@ -332,8 +329,6 @@ public class TelaVacina extends javax.swing.JFrame {
     }//GEN-LAST:event_areaCPFAplicarVacinaActionPerformed
 
     private void btnAplicarVacinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarVacinaActionPerformed
-
-		   
     	       vu.setCpf(areaCPFAplicarVacina.getText());
     	       vu.setImunobiologico(jComboBoxImunobiologicoAplicarVacina.getSelectedItem().toString());
     	       
