@@ -10,7 +10,6 @@ public class TelaHistorico extends javax.swing.JFrame {
 
    
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jFrame1 = new javax.swing.JFrame();
@@ -21,7 +20,6 @@ public class TelaHistorico extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jComboBoxImunobiologico = new javax.swing.JComboBox<>();
         btnListarHistorico = new javax.swing.JButton();
-        btnLimparTabelaHistorico = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -40,16 +38,18 @@ public class TelaHistorico extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "REGIÃO", "IMUNOBIOLÓGICO", "DOSE", "CRIANÇA", "ADOSLESCENTE", "ADULTO", "IDOSO", "GESTANTE", "MÊS - APLICAÇÃO", "TOTAL"
+                "REGIÃO", "IMUNOBIOLÓGICO", "TOTAL"
             }
-        ) {
-            Class[] types = new Class [] {
+        ) 
+        {
+			private static final long serialVersionUID = 1L;
+			Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class
             };
 
@@ -59,7 +59,7 @@ public class TelaHistorico extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14));
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
         jLabel2.setText("HISTÓRICO - SISTEMA DE VACINAÇÃO");
 
@@ -97,13 +97,6 @@ public class TelaHistorico extends javax.swing.JFrame {
             }
         });
 
-        btnLimparTabelaHistorico.setText("LIMPAR TABELA");
-        btnLimparTabelaHistorico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparTabelaHistoricoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,7 +105,6 @@ public class TelaHistorico extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnListarHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnLimparTabelaHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(481, 481, 481))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -136,21 +128,20 @@ public class TelaHistorico extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnListarHistorico)
-                    .addComponent(btnLimparTabelaHistorico))
+                    .addComponent(btnListarHistorico))
                 .addContainerGap())
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void btnListarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarHistoricoActionPerformed
+    private void btnListarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {
          
-    }//GEN-LAST:event_btnListarHistoricoActionPerformed
+    }
 
-    private void btnLimparTabelaHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparTabelaHistoricoActionPerformed
+    private void btnLimparTabelaHistoricoActionPerformed(java.awt.event.ActionEvent evt) {
         
-    }//GEN-LAST:event_btnLimparTabelaHistoricoActionPerformed
+    }
 
  
     public static void main(String args[]) {
@@ -162,8 +153,6 @@ public class TelaHistorico extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLimparTabelaHistorico;
     private javax.swing.JButton btnListarHistorico;
     private javax.swing.JComboBox<String> jComboBoxImunobiologico;
     private javax.swing.JFrame jFrame1;
@@ -172,5 +161,4 @@ public class TelaHistorico extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    // End of variables declaration//GEN-END:variables
 }

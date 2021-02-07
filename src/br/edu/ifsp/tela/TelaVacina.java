@@ -21,6 +21,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.GroupLayout;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
+import javax.swing.SpinnerModel;
+
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.ArrayList;
@@ -48,7 +50,6 @@ public class TelaVacina extends javax.swing.JFrame {
 
  
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
@@ -70,15 +71,20 @@ public class TelaVacina extends javax.swing.JFrame {
         btnLimparDadosAplicarVacina = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jComboBoxUFAplicarVacina = new javax.swing.JComboBox<>();
+        modelDataAplicar = new SpinnerDateModel(new Date(), new java.util.Date(-1577907720000L), new Date(), Calendar.DAY_OF_YEAR);
         txtDataAplicarVacina = new javax.swing.JSpinner();
+        txtDataAplicarVacina.setModel(modelDataAplicar);
         txtDataAplicarVacina.setLocale(new Locale("pt", "BR"));
+        txtDataAplicarVacina.setEditor(new JSpinner.DateEditor(txtDataAplicarVacina, "dd/MM/yyyy"));
         txtProximaVacina2 = new javax.swing.JSpinner();
+        modelDataProxima = new SpinnerDateModel(new Date(), new java.util.Date(-1577907720000L), new Date(), Calendar.DAY_OF_YEAR);
         txtProximaVacina2.setLocale(new Locale("pt", "BR"));
+        txtProximaVacina2.setModel(modelDataProxima);
+        txtProximaVacina2.setEditor(new JSpinner.DateEditor(txtProximaVacina2, "dd/MM/yyyy"));
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaVacina = new javax.swing.JTable();
-        //jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
 
@@ -95,16 +101,9 @@ public class TelaVacina extends javax.swing.JFrame {
         });
 
         jLabel2.setText("NOME:");
-
-        //lblNomeAplicarVacina.setText("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-        
-
         jLabel6.setText("IMUNOBIOLÓGICO:  ");
-
         jComboBoxImunobiologicoAplicarVacina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FEBRE AMARELA", "HIV", "TETRA VIRAL", "HEPATITE A", "POLIOMELITE", "DENGUUE", "INFLUENZA", "MENINGOCÓCICA ACWY", "DTPA" }));
-
         jLabel7.setText("DATA-APLICAÇÃO:");
-
         btnAplicarVacina.setText("APLICAR");
         btnAplicarVacina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,16 +119,11 @@ public class TelaVacina extends javax.swing.JFrame {
         });
 
         jLabel11.setText("UF-APLICAÇÃO:");
-
         jComboBoxUFAplicarVacina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO", "DF" }));
-
-        txtDataAplicarVacina.setModel(new SpinnerDateModel(new Date(1612447200959L), null, null, Calendar.DAY_OF_YEAR));
-        
         JLabel jLabel8 = new JLabel("PROXIMA-APLICAÇÃO:");
-        
         JButton btnBuscarCpf = new JButton("BUSCAR");
+       
         btnBuscarCpf.addActionListener(new ActionListener() {
-        	
         	public void actionPerformed(ActionEvent e) {
         		       			
         			String consutaCpf = areaCPFAplicarVacina.getText();
@@ -143,8 +137,10 @@ public class TelaVacina extends javax.swing.JFrame {
         
         txtNextVacina = new JSpinner();
         txtNextVacina.setLocale(new Locale("pt", "BR"));
-        txtNextVacina.setModel(new SpinnerDateModel(new Date(1612404000000L), null, null, Calendar.DAY_OF_YEAR));
-
+        SpinnerDateModel modelNext = new SpinnerDateModel(new Date(1612404000000L), null, null, Calendar.DAY_OF_YEAR);
+        txtNextVacina.setModel(modelNext);
+        txtNextVacina.setEditor((new JSpinner.DateEditor(txtProximaVacina2, "dd/MM/yyyy")));
+        
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1Layout.setHorizontalGroup(
         	jPanel1Layout.createParallelGroup(Alignment.LEADING)
@@ -332,8 +328,8 @@ public class TelaVacina extends javax.swing.JFrame {
     	       vu.setCpf(areaCPFAplicarVacina.getText());
     	       vu.setImunobiologico(jComboBoxImunobiologicoAplicarVacina.getSelectedItem().toString());
     	       
-    	       SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-    	       DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    	       SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    	       DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     	       
     	       String dataAplicacaoFormat = dateFormat.format((Date)txtDataAplicarVacina.getValue());
     	       vu.setDtaplicacao(LocalDate.parse(dataAplicacaoFormat, formato));
@@ -456,4 +452,6 @@ public class TelaVacina extends javax.swing.JFrame {
     private javax.swing.JSpinner txtDataAplicarVacina;
     private javax.swing.JSpinner txtProximaVacina2;
     private JSpinner txtNextVacina;
+	private SpinnerDateModel modelDataAplicar;
+	private SpinnerDateModel modelDataProxima;
 }
