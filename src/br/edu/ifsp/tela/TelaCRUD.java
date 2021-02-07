@@ -66,7 +66,6 @@ public class TelaCRUD extends JFrame {
         areaNomeCadastar = new JTextField();
         radioHomemCadastar = new JRadioButton();
         radioMulherCadastar = new JRadioButton();
-        checkGestanteCadastar = new JCheckBox();
         MaskFormatter maskCadastrar = new MaskFormatter("###.###.###-##");
 		areaCPFCadastar = new JFormattedTextField(maskCadastrar);
         jComboBoxUFCadastar = new JComboBox<>();
@@ -102,7 +101,6 @@ public class TelaCRUD extends JFrame {
         areaNomeAtualizar = new JTextField();
         radioHomemAtualizar = new JRadioButton();
         radioMulherAtualizar = new JRadioButton();
-        checkGestanteAtualizar = new JCheckBox();
         MaskFormatter maskAtualizar = new MaskFormatter("###.###.###-##");
         areaCPFAtualizar = new JFormattedTextField(maskAtualizar);
         jComboBoxUFAtualizar = new JComboBox<>();
@@ -152,8 +150,6 @@ public class TelaCRUD extends JFrame {
 
         buttonGroup1.add(radioMulherCadastar);
         radioMulherCadastar.setText("MULHER");
-
-        checkGestanteCadastar.setText("GESTANTE");
 
         areaCPFCadastar.setText(" ");
 
@@ -214,8 +210,7 @@ public class TelaCRUD extends JFrame {
                                         .addComponent(radioHomemCadastar)
                                         .addGap(18, 18, 18)
                                         .addComponent(radioMulherCadastar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(checkGestanteCadastar))))))
+                                        .addGap(18, 18, 18))))))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(91, 91, 91)
                         .addComponent(jLabel19)))
@@ -238,8 +233,7 @@ public class TelaCRUD extends JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(radioHomemCadastar, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(radioMulherCadastar)
-                    .addComponent(checkGestanteCadastar))
+                    .addComponent(radioMulherCadastar))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
@@ -446,8 +440,6 @@ public class TelaCRUD extends JFrame {
         buttonGroup2.add(radioMulherAtualizar);
         radioMulherAtualizar.setText("MULHER");
 
-        checkGestanteAtualizar.setText("GESTANTE");
-
         areaCPFAtualizar.setText(" ");
 
         jComboBoxUFAtualizar.setModel(new DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO", "DF" }));
@@ -494,8 +486,7 @@ public class TelaCRUD extends JFrame {
                                                 .addComponent(radioHomemAtualizar)
                                                 .addGap(22, 22, 22)
                                                 .addComponent(radioMulherAtualizar)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(checkGestanteAtualizar))
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED))
                                             .addComponent(areaNomeAtualizar, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txtDataAtualizar, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel8Layout.createSequentialGroup()
@@ -528,7 +519,6 @@ public class TelaCRUD extends JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(radioHomemAtualizar, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
                     .addComponent(radioMulherAtualizar)
-                    .addComponent(checkGestanteAtualizar)
                     .addComponent(jLabel31))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -805,8 +795,6 @@ public class TelaCRUD extends JFrame {
     private ButtonGroup buttonGroup2;
     private ButtonGroup buttonGroup3;
     private ButtonGroup buttonGroup4;
-    private JCheckBox checkGestanteAtualizar;
-    private JCheckBox checkGestanteCadastar;
     private JComboBox<String> jComboBoxUFAtualizar;
     private JComboBox<String> jComboBoxUFCadastar;
     private JLabel jLabel1;
