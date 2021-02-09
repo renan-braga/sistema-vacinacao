@@ -1,4 +1,6 @@
-package br.edu.ifsp.modelo;
+package br.edu.ifsp.dto;
+
+import br.edu.ifsp.modelo.VacinaUsuario;
 
 public class VacinaDTO extends VacinaUsuario {
 	    private String nomeUsuario;

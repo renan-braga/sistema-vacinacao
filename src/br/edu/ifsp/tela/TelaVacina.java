@@ -1,457 +1,402 @@
 package br.edu.ifsp.tela;
 
-import java.text.DateFormat;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SpinnerDateModel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.WindowConstants;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import br.edu.ifsp.dao.UsuarioDAO;
+import br.edu.ifsp.dao.VacinaUsuarioDAO;
+import br.edu.ifsp.dto.VacinaDTO;
 import br.edu.ifsp.modelo.Usuario;
-import br.edu.ifsp.modelo.VacinaDTO;
 import br.edu.ifsp.modelo.VacinaUsuario;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.GroupLayout;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerDateModel;
-import javax.swing.SpinnerModel;
-
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.ArrayList;
-import java.util.Calendar;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.Locale;
-import java.awt.Font;
-
-public class TelaVacina extends javax.swing.JFrame {
+public class TelaVacina extends JFrame {
+	private static final long serialVersionUID = 1L;
+	Usuario u = new Usuario();
+	VacinaUsuario vacinaUsuario = new VacinaUsuario();
+	UsuarioDAO usuarioDAO = new UsuarioDAO();
+	VacinaUsuarioDAO vacinaUsuarioDAO = new VacinaUsuarioDAO();
+	DateTimeFormatter parser = DateTimeFormatter.ofPattern("dd/MM/uuuu");
 	
-	 Usuario u = new Usuario();
-	 VacinaUsuario vu = new VacinaUsuario();
-	 UsuarioDAO ud = new UsuarioDAO();
-	 DateTimeFormatter parser = DateTimeFormatter.ofPattern("dd/MM/uuuu");
-	 //Calendar c = Calendar.getInstance();
+	private JFormattedTextField areaCPFAplicarVacina;
+	private JButton btnAplicarVacina;
+	private JButton btnLimparDadosAplicarVacina;
+	private JComboBox<String> jComboBoxImunobiologicoAplicarVacina;
+	private JComboBox<String> jComboBoxUFAplicarVacina;
+	private JLabel jLabel1;
+	private JLabel jLabel10;
+	private JLabel jLabel11;
+	private JLabel jLabel2;
+	private JLabel jLabel6;
+	private JLabel jLabel7;
+	private JPanel jPanel1;
+	private JPanel jPanel2;
+	private JScrollPane jScrollPane1;
+	private JTabbedPane jTabbedPane1;
+	private JTable tabelaVacina;
+	private JTable jTable2;
+	private JLabel lblNomeAplicarVacina;
+	private JSpinner txtDataAplicarVacina;
+	private JSpinner txtProximaVacina2;
+	private JSpinner txtNextVacina;
+	private SpinnerDateModel modelDataAplicar;
+	private SpinnerDateModel modelDataProxima;
 
-    /**
-     * Creates new form TelaVacina
-     */
-    public TelaVacina() {
-        initComponents();
-    }
+	public TelaVacina() {
+		initComponents();
+	}
 
- 
-    @SuppressWarnings("unchecked")
-    private void initComponents() {
+	@SuppressWarnings({ "unchecked", "serial" })
+	private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        try {
-			areaCPFAplicarVacina = new javax.swing.JFormattedTextField(new MaskFormatter("###.###.###-##"));
+		jPanel1 = new JPanel();
+		jLabel1 = new JLabel();
+		try {
+			areaCPFAplicarVacina = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-        jLabel2 = new javax.swing.JLabel();
-        lblNomeAplicarVacina = new javax.swing.JLabel();
-        lblNomeAplicarVacina.setFont(new Font("Tahoma", Font.BOLD, 12));
-        jLabel6 = new javax.swing.JLabel();
-        jComboBoxImunobiologicoAplicarVacina = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        btnAplicarVacina = new javax.swing.JButton();
-        btnLimparDadosAplicarVacina = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
-        jComboBoxUFAplicarVacina = new javax.swing.JComboBox<>();
-        modelDataAplicar = new SpinnerDateModel(new Date(), new java.util.Date(-1577907720000L), new Date(), Calendar.DAY_OF_YEAR);
-        txtDataAplicarVacina = new javax.swing.JSpinner();
-        txtDataAplicarVacina.setModel(modelDataAplicar);
-        txtDataAplicarVacina.setLocale(new Locale("pt", "BR"));
-        txtDataAplicarVacina.setEditor(new JSpinner.DateEditor(txtDataAplicarVacina, "dd/MM/yyyy"));
-        txtProximaVacina2 = new javax.swing.JSpinner();
-        modelDataProxima = new SpinnerDateModel(new Date(), new java.util.Date(-1577907720000L), new Date(), Calendar.DAY_OF_YEAR);
-        txtProximaVacina2.setLocale(new Locale("pt", "BR"));
-        txtProximaVacina2.setModel(modelDataProxima);
-        txtProximaVacina2.setEditor(new JSpinner.DateEditor(txtProximaVacina2, "dd/MM/yyyy"));
-        jPanel2 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaVacina = new javax.swing.JTable();
-        jTable2 = new javax.swing.JTable();
-        jLabel10 = new javax.swing.JLabel();
+		jLabel2 = new JLabel();
+		lblNomeAplicarVacina = new JLabel();
+		lblNomeAplicarVacina.setFont(new Font("Tahoma", Font.BOLD, 12));
+		jLabel6 = new JLabel();
+		jComboBoxImunobiologicoAplicarVacina = new JComboBox<>();
+		jLabel7 = new JLabel();
+		btnAplicarVacina = new JButton();
+		btnLimparDadosAplicarVacina = new JButton();
+		jLabel11 = new JLabel();
+		jComboBoxUFAplicarVacina = new JComboBox<>();
+		modelDataAplicar = new SpinnerDateModel(new Date(), new java.util.Date(-1577907720000L), new Date(),
+				Calendar.DAY_OF_YEAR);
+		txtDataAplicarVacina = new JSpinner();
+		txtDataAplicarVacina.setModel(modelDataAplicar);
+		txtDataAplicarVacina.setLocale(new Locale("pt", "BR"));
+		txtDataAplicarVacina.setEditor(new JSpinner.DateEditor(txtDataAplicarVacina, "dd/MM/yyyy"));
+		txtProximaVacina2 = new JSpinner();
+		modelDataProxima = new SpinnerDateModel(new Date(), new java.util.Date(-1577907720000L), new Date(),
+				Calendar.DAY_OF_YEAR);
+		txtProximaVacina2.setLocale(new Locale("pt", "BR"));
+		txtProximaVacina2.setModel(modelDataProxima);
+		txtProximaVacina2.setEditor(new JSpinner.DateEditor(txtProximaVacina2, "dd/MM/yyyy"));
+		jPanel2 = new JPanel();
+		jTabbedPane1 = new JTabbedPane();
+		jScrollPane1 = new JScrollPane();
+		tabelaVacina = new JTable();
+		jTable2 = new JTable();
+		jLabel10 = new JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+		jPanel1.setBorder(new LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        jLabel1.setText("CPF:");
+		jLabel1.setText("CPF:");
 
-        areaCPFAplicarVacina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                areaCPFAplicarVacinaActionPerformed(evt);
-            }
-        });
+		areaCPFAplicarVacina.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				areaCPFAplicarVacinaActionPerformed(evt);
+			}
+		});
 
-        jLabel2.setText("NOME:");
-        jLabel6.setText("IMUNOBIOLÓGICO:  ");
-        jComboBoxImunobiologicoAplicarVacina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FEBRE AMARELA", "HIV", "TETRA VIRAL", "HEPATITE A", "POLIOMELITE", "DENGUUE", "INFLUENZA", "MENINGOCÓCICA ACWY", "DTPA" }));
-        jLabel7.setText("DATA-APLICAÇÃO:");
-        btnAplicarVacina.setText("APLICAR");
-        btnAplicarVacina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAplicarVacinaActionPerformed(evt);
-            }
-        });
+		jLabel2.setText("NOME:");
+		jLabel6.setText("IMUNOBIOLÓGICO:  ");
+		jComboBoxImunobiologicoAplicarVacina
+				.setModel(new DefaultComboBoxModel<>(new String[] { "FEBRE AMARELA", "HIV", "TETRA VIRAL",
+						"HEPATITE A", "POLIOMELITE", "DENGUE", "INFLUENZA", "MENINGOCÓCICA ACWY", "DTPA" }));
+		jLabel7.setText("DATA-APLICAÇÃO:");
+		btnAplicarVacina.setText("APLICAR");
+		btnAplicarVacina.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				btnAplicarVacinaActionPerformed(evt);
+			}
+		});
 
-        btnLimparDadosAplicarVacina.setText("LIMPAR DADOS");
-        btnLimparDadosAplicarVacina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparDadosAplicarVacinaActionPerformed(evt);
-            }
-        });
+		btnLimparDadosAplicarVacina.setText("LIMPAR DADOS");
+		btnLimparDadosAplicarVacina.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				btnLimparDadosAplicarVacinaActionPerformed(evt);
+			}
+		});
 
-        jLabel11.setText("UF-APLICAÇÃO:");
-        jComboBoxUFAplicarVacina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO", "DF" }));
-        JLabel jLabel8 = new JLabel("PROXIMA-APLICAÇÃO:");
-        JButton btnBuscarCpf = new JButton("BUSCAR");
-       
-        btnBuscarCpf.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		       			
-        			String consutaCpf = areaCPFAplicarVacina.getText();
-        			u = ud.consultarUsuarioCPF(consutaCpf);
-        			lblNomeAplicarVacina.setText(u.getNome());;
-        			
-        			ListarValores();
-        		}
- 
-        });
-        
-        txtNextVacina = new JSpinner();
-        txtNextVacina.setLocale(new Locale("pt", "BR"));
-        SpinnerDateModel modelNext = new SpinnerDateModel(new Date(1612404000000L), null, null, Calendar.DAY_OF_YEAR);
-        txtNextVacina.setModel(modelNext);
-        txtNextVacina.setEditor((new JSpinner.DateEditor(txtProximaVacina2, "dd/MM/yyyy")));
-        
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1Layout.setHorizontalGroup(
-        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(jPanel1Layout.createSequentialGroup()
-        					.addGap(0, 697, Short.MAX_VALUE)
-        					.addComponent(btnAplicarVacina, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(btnLimparDadosAplicarVacina))
-        				.addGroup(jPanel1Layout.createSequentialGroup()
-        					.addGap(20)
-        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(jPanel1Layout.createSequentialGroup()
-        							.addComponent(jLabel6)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(jComboBoxImunobiologicoAplicarVacina, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(jPanel1Layout.createSequentialGroup()
-        							.addComponent(jLabel2)
-        							.addGap(18)
-        							.addComponent(lblNomeAplicarVacina))
-        						.addGroup(jPanel1Layout.createSequentialGroup()
-        							.addComponent(jLabel1)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(areaCPFAplicarVacina, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        							.addGap(18)
-        							.addComponent(btnBuscarCpf))
-        						.addGroup(jPanel1Layout.createSequentialGroup()
-        							.addComponent(jLabel7)
-        							.addGap(18)
-        							.addComponent(txtDataAplicarVacina, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        							.addGap(49)
-        							.addComponent(jLabel8)
-        							.addGap(18)
-        							.addComponent(txtNextVacina, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(jPanel1Layout.createSequentialGroup()
-        							.addComponent(jLabel11)
-        							.addGap(32)
-        							.addComponent(jComboBoxUFAplicarVacina, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)))
-        					.addGap(411)))
-        			.addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addGap(24)
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel1)
-        				.addComponent(areaCPFAplicarVacina, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(btnBuscarCpf))
-        			.addGap(18)
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel2)
-        				.addComponent(lblNomeAplicarVacina))
-        			.addGap(18)
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel6)
-        				.addComponent(jComboBoxImunobiologicoAplicarVacina, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addGap(18)
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel7)
-        				.addComponent(jLabel8)
-        				.addComponent(txtDataAplicarVacina, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(txtNextVacina, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addPreferredGap(ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel11)
-        				.addComponent(jComboBoxUFAplicarVacina, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addGap(18)
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(btnLimparDadosAplicarVacina)
-        				.addComponent(btnAplicarVacina))
-        			.addContainerGap())
-        );
-        jPanel1.setLayout(jPanel1Layout);
+		jLabel11.setText("UF-APLICAÇÃO:");
+		jComboBoxUFAplicarVacina.setModel(new DefaultComboBoxModel<>(
+				new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR",
+						"PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO", "DF" }));
+		JLabel jLabel8 = new JLabel("PROXIMA-APLICAÇÃO:");
+		JButton btnBuscarCpf = new JButton("BUSCAR");
 
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+		btnBuscarCpf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
-        tabelaVacina.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "NOME", "SEXO", "IMUNOBIOLÓGICO", "UF-APLICAÇÃO", "DATA DE APLICAÇÃO", "PRÓXIMA APLICAÇÃO"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
+				String consutaCpf = areaCPFAplicarVacina.getText();
+				u = usuarioDAO.consultarUsuarioCPF(consutaCpf);
+				lblNomeAplicarVacina.setText(u.getNome());
+				;
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        
-        
-        jScrollPane1.setViewportView(tabelaVacina);
+				listarValores();
+			}
 
-        jTabbedPane1.addTab("HISTÓRICO VACINAÇÃO", jScrollPane1);
+		});
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "NOME", "CPF", "SEXO", "IMUNOBIOLÓGICO", "UF-APLICAÇÃO", "DATA DE APLICAÇÃO", "PRÓXIMA APLICAÇÃO"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
+		txtNextVacina = new JSpinner();
+		txtNextVacina.setLocale(new Locale("pt", "BR"));
+		SpinnerDateModel modelNext = new SpinnerDateModel(new Date(1612404000000L), null, null, Calendar.DAY_OF_YEAR);
+		txtNextVacina.setModel(modelNext);
+		txtNextVacina.setEditor((new JSpinner.DateEditor(txtProximaVacina2, "dd/MM/yyyy")));
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        //jScrollPane2.setViewportView(jTable2);
+		GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
+		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING).addGroup(jPanel1Layout
+				.createSequentialGroup()
+				.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+						.addGroup(jPanel1Layout.createSequentialGroup().addGap(0, 697, Short.MAX_VALUE)
+								.addComponent(btnAplicarVacina, GroupLayout.PREFERRED_SIZE, 107,
+										GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnLimparDadosAplicarVacina))
+						.addGroup(jPanel1Layout.createSequentialGroup().addGap(20)
+								.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+										.addGroup(jPanel1Layout.createSequentialGroup().addComponent(jLabel6)
+												.addPreferredGap(ComponentPlacement.UNRELATED)
+												.addComponent(jComboBoxImunobiologicoAplicarVacina,
+														GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE))
+										.addGroup(jPanel1Layout.createSequentialGroup().addComponent(jLabel2).addGap(18)
+												.addComponent(lblNomeAplicarVacina))
+										.addGroup(jPanel1Layout.createSequentialGroup().addComponent(jLabel1)
+												.addPreferredGap(ComponentPlacement.UNRELATED)
+												.addComponent(areaCPFAplicarVacina, GroupLayout.PREFERRED_SIZE, 123,
+														GroupLayout.PREFERRED_SIZE)
+												.addGap(18).addComponent(btnBuscarCpf))
+										.addGroup(jPanel1Layout.createSequentialGroup().addComponent(jLabel7).addGap(18)
+												.addComponent(txtDataAplicarVacina, GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addGap(49).addComponent(jLabel8).addGap(18).addComponent(txtNextVacina,
+														GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE))
+										.addGroup(jPanel1Layout.createSequentialGroup().addComponent(jLabel11)
+												.addGap(32).addComponent(jComboBoxUFAplicarVacina,
+														GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)))
+								.addGap(411)))
+				.addContainerGap()));
+		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING).addGroup(jPanel1Layout
+				.createSequentialGroup().addGap(24)
+				.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE).addComponent(jLabel1)
+						.addComponent(areaCPFAplicarVacina, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnBuscarCpf))
+				.addGap(18)
+				.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE).addComponent(jLabel2)
+						.addComponent(lblNomeAplicarVacina))
+				.addGap(18)
+				.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE).addComponent(jLabel6).addComponent(
+						jComboBoxImunobiologicoAplicarVacina, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						GroupLayout.PREFERRED_SIZE))
+				.addGap(18)
+				.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE).addComponent(jLabel7)
+						.addComponent(jLabel8)
+						.addComponent(txtDataAplicarVacina, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtNextVacina, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+				.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE).addComponent(jLabel11).addComponent(
+						jComboBoxUFAplicarVacina, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						GroupLayout.PREFERRED_SIZE))
+				.addGap(18).addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnLimparDadosAplicarVacina).addComponent(btnAplicarVacina))
+				.addContainerGap()));
+		jPanel1.setLayout(jPanel1Layout);
 
-        //jTabbedPane1.addTab("HISTÓRICO DE VACINAÇÃO", jScrollPane2);
-        
+		jPanel2.setBorder(new LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 907, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 22, Short.MAX_VALUE))
-        );
+		tabelaVacina.setModel(new DefaultTableModel(
+				new Object[][] { { null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null }, { null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null } },
+				new String[] { "NOME", "SEXO", "IMUNOBIOLÓGICO", "UF-APLICAÇÃO", "DATA DE APLICAÇÃO",
+						"PRÓXIMA APLICAÇÃO" }) {
+			@SuppressWarnings("rawtypes")
+			Class[] types = new Class[] { String.class, String.class, String.class, String.class, String.class,
+					String.class, String.class };
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel10.setText("APLICAR VACINA - SISTEMA DE VACINAÇÃO");
+			@SuppressWarnings("rawtypes")
+			public Class getColumnClass(int columnIndex) {
+				return types[columnIndex];
+			}
+		});
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        layout.setHorizontalGroup(
-        	layout.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        				.addGroup(layout.createSequentialGroup()
-        					.addGap(0, 0, Short.MAX_VALUE)
-        					.addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        			.addContainerGap())
-        		.addGroup(layout.createSequentialGroup()
-        			.addContainerGap(343, Short.MAX_VALUE)
-        			.addComponent(jLabel10)
-        			.addGap(337))
-        );
-        layout.setVerticalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(layout.createSequentialGroup()
-        			.addGap(10)
-        			.addComponent(jLabel10)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addGap(18)
-        			.addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        			.addGap(40))
-        );
-        getContentPane().setLayout(layout);
+		jScrollPane1.setViewportView(tabelaVacina);
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+		jTabbedPane1.addTab("HISTÓRICO VACINAÇÃO", jScrollPane1);
 
-    private void areaCPFAplicarVacinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_areaCPFAplicarVacinaActionPerformed
-        // DESENVOLVER LÓGICA AQUI!!
-    }//GEN-LAST:event_areaCPFAplicarVacinaActionPerformed
+		jTable2.setModel(new DefaultTableModel(
+				new Object[][] { { null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null }, { null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null } },
+				new String[] { "NOME", "CPF", "SEXO", "IMUNOBIOLÓGICO", "UF-APLICAÇÃO", "DATA DE APLICAÇÃO",
+						"PRÓXIMA APLICAÇÃO" }) {
+			private static final long serialVersionUID = 1L;
+			@SuppressWarnings("rawtypes")
+			Class[] types = new Class[] { String.class, java.lang.Object.class, String.class, String.class,
+					String.class, String.class, String.class };
 
-    private void btnAplicarVacinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarVacinaActionPerformed
-    	       vu.setCpf(areaCPFAplicarVacina.getText());
-    	       vu.setImunobiologico(jComboBoxImunobiologicoAplicarVacina.getSelectedItem().toString());
-    	       
-    	       SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    	       DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    	       
-    	       String dataAplicacaoFormat = dateFormat.format((Date)txtDataAplicarVacina.getValue());
-    	       vu.setDtaplicacao(LocalDate.parse(dataAplicacaoFormat, formato));
-    	       
-    	       String dataProxAplicacaoFormat = dateFormat.format((Date)txtNextVacina.getValue());
-    	       vu.setDtproximaaplicacao(LocalDate.parse(dataProxAplicacaoFormat, formato));
-    	        
-    	       System.out.println(vu.getDtaplicacao());
-    	       System.out.println(vu.getDtproximaaplicacao());
-    
-    	       vu.setUfaplicacao(jComboBoxUFAplicarVacina.getSelectedItem().toString());
-           		
-               ud.aplicarVacinaUsuario(vu);
-               ListarValores();
-               
+			@SuppressWarnings("rawtypes")
+			public Class getColumnClass(int columnIndex) {
+				return types[columnIndex];
+			}
+		});
 
-    }
-    
-	private void ListarValores() {
+		GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
+		jPanel2.setLayout(jPanel2Layout);
+		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(GroupLayout.Alignment.TRAILING,
+						jPanel2Layout.createSequentialGroup()
+								.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(jTabbedPane1, GroupLayout.PREFERRED_SIZE, 907,
+										GroupLayout.PREFERRED_SIZE)
+								.addContainerGap()));
+		jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel2Layout.createSequentialGroup().addComponent(jTabbedPane1,
+						GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
+						.addGap(0, 22, Short.MAX_VALUE)));
+
+		jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+		jLabel10.setForeground(new java.awt.Color(153, 153, 153));
+		jLabel10.setText("APLICAR VACINA - SISTEMA DE VACINAÇÃO");
+
+		GroupLayout layout = new GroupLayout(getContentPane());
+		layout.setHorizontalGroup(layout.createParallelGroup(Alignment.TRAILING).addGroup(layout.createSequentialGroup()
+				.addContainerGap()
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+						.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE).addComponent(jPanel2,
+								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+				.addContainerGap())
+				.addGroup(layout.createSequentialGroup().addContainerGap(343, Short.MAX_VALUE).addComponent(jLabel10)
+						.addGap(337)));
+		layout.setVerticalGroup(layout.createParallelGroup(Alignment.LEADING).addGroup(layout.createSequentialGroup()
+				.addGap(10).addComponent(jLabel10).addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addGap(18).addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addGap(40)));
+		getContentPane().setLayout(layout);
+
+		pack();
+	}
+	
+	private void areaCPFAplicarVacinaActionPerformed(ActionEvent evt) {
+		// DESENVOLVER LÓGICA AQUI!!
+	}
+
+	private void btnAplicarVacinaActionPerformed(ActionEvent evt) {
+		vacinaUsuario.setCpf(areaCPFAplicarVacina.getText());
+		vacinaUsuario.setImunobiologico(jComboBoxImunobiologicoAplicarVacina.getSelectedItem().toString());
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		try {
-			
-			VacinaUsuario vacinaUsuario = new VacinaUsuario();
-			//vu.setCpf(areaCPFAplicarVacina.getText());
-			
+			txtDataAplicarVacina.commitEdit();
+			txtNextVacina.commitEdit();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		String dataAplicacaoFormat = dateFormat.format((Date) txtDataAplicarVacina.getValue());
+		vacinaUsuario.setDtaplicacao(LocalDate.parse(dataAplicacaoFormat, formato));
+		String dataProxAplicacaoFormat = dateFormat.format((Date) txtNextVacina.getValue());
+		vacinaUsuario.setDtproximaaplicacao(LocalDate.parse(dataProxAplicacaoFormat, formato));
+		System.out.println(vacinaUsuario.getDtaplicacao());
+		System.out.println(vacinaUsuario.getDtproximaaplicacao());
+		vacinaUsuario.setUfaplicacao(jComboBoxUFAplicarVacina.getSelectedItem().toString());
+		vacinaUsuarioDAO.aplicarVacinaUsuario(vacinaUsuario);
+		
+		listarValores();
+	}
+
+	private void listarValores() {
+		try {
 			DefaultTableModel model = (DefaultTableModel) tabelaVacina.getModel();
 			model.setNumRows(0);
-			
-			VacinaDTO vacinadto = new VacinaDTO();
-			
-			ArrayList<VacinaDTO> lista = ud.PesquisarVacina(areaCPFAplicarVacina.getText());
-			 DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			
+			ArrayList<VacinaDTO> lista = vacinaUsuarioDAO.pesquisarVacina(areaCPFAplicarVacina.getText());
+			DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-			for(int num = 0; num < lista.size(); num ++ ) {
-				
-				model.addRow(new Object[] {
-						//lista.get(num).getId(),
-						lista.get(num).getNomeUsuario(),
-						lista.get(num).getSexoUsuario(),
-						lista.get(num).getImunobiologico(),
-						lista.get(num).getUfaplicacao(),
+			for (int num = 0; num < lista.size(); num++) {
+				model.addRow(new Object[] { lista.get(num).getNomeUsuario(), lista.get(num).getSexoUsuario(),
+						lista.get(num).getImunobiologico(), lista.get(num).getUfaplicacao(),
 						lista.get(num).getDtaplicacao().format(formato),
-						lista.get(num).getDtproximaaplicacao().format(formato)
-					
-				});
+						lista.get(num).getDtproximaaplicacao().format(formato) });
 			}
-			
 		} catch (Exception erro) {
 			JOptionPane.showMessageDialog(null, "Listar valores" + erro);
 		}
 	}
 
-    private void btnLimparDadosAplicarVacinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparDadosAplicarVacinaActionPerformed
-               limparCamposVacina();
-               
-    }
-    
-    public void limparCamposVacina() {
-    	
-    	areaCPFAplicarVacina.setText("");
-        lblNomeAplicarVacina.setText("");
-        ((DefaultTableModel) tabelaVacina.getModel()).setRowCount(0);
-    }
- 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaVacina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaVacina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaVacina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaVacina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+	private void btnLimparDadosAplicarVacinaActionPerformed(ActionEvent evt) {
+		limparCamposVacina();
+	}
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaVacina().setVisible(true);
-            }
-        });
-    }
+	public void limparCamposVacina() {
+		areaCPFAplicarVacina.setText("");
+		lblNomeAplicarVacina.setText("");
+		((DefaultTableModel) tabelaVacina.getModel()).setRowCount(0);
+	}
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField areaCPFAplicarVacina;
-    private javax.swing.JButton btnAplicarVacina;
-    private javax.swing.JButton btnLimparDadosAplicarVacina;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JComboBox<String> jComboBoxImunobiologicoAplicarVacina;
-    private javax.swing.JComboBox<String> jComboBoxUFAplicarVacina;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    //private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable tabelaVacina;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JLabel lblNomeAplicarVacina;
-    private javax.swing.JSpinner txtDataAplicarVacina;
-    private javax.swing.JSpinner txtProximaVacina2;
-    private JSpinner txtNextVacina;
-	private SpinnerDateModel modelDataAplicar;
-	private SpinnerDateModel modelDataProxima;
+	public static void main(String args[]) {
+		try {
+			for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(TelaVacina.class.getName()).log(Level.SEVERE, null,
+					ex);
+		} catch (InstantiationException ex) {
+			Logger.getLogger(TelaVacina.class.getName()).log(Level.SEVERE, null,
+					ex);
+		} catch (IllegalAccessException ex) {
+			Logger.getLogger(TelaVacina.class.getName()).log(Level.SEVERE, null,
+					ex);
+		} catch (UnsupportedLookAndFeelException ex) {
+			Logger.getLogger(TelaVacina.class.getName()).log(Level.SEVERE, null,
+					ex);
+		}
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				new TelaVacina().setVisible(true);
+			}
+		});
+	}
 }

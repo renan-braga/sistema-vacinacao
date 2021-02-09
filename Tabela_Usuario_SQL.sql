@@ -1,3 +1,14 @@
+CREATE TABLE IF NOT EXISTS vacina_aplicada (
+  id int NOT NULL AUTO_INCREMENT,
+  cpf varchar(20) NOT NULL,
+  imunobiologico varchar(50) NOT NULL,
+  dt_aplicacao date NOT NULL,
+  dt_proxima_aplicacao date NOT NULL,
+  uf_aplicacao varchar(2) NOT NULL,
+  PRIMARY KEY (id),
+  KEY fk_cpf (cpf)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 create table usuario(
  	nomeCompleto varchar(25) not null,
  	idade int not null,
@@ -58,3 +69,73 @@ INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Fernando Cauã
 INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Maria Isabel Bárbara Fernandes",23,"MULHER","410.785.737-94","DF");
 INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Igor Tomás José Barbosa",21,"HOMEM","596.125.415-15","DF");
 
+CREATE TABLE estado(
+	nome_estado varchar(20) not null,
+	abreviacao varchar(3) not null,
+	constraint primary key (abreviacao)
+);
+
+insert into estado values ("RIO GRANDE DO NORTE", "RN");
+insert into estado values ("ACRE", "AC");
+insert into estado values ("ALAGOAS", "AL");
+insert into estado values ("AMAPA", "AP");
+insert into estado values ("AMAZONAS", "AM");
+insert into estado values ("BAHIA", "BA");
+insert into estado values ("CEARA", "CE");
+insert into estado values ("DISTRITO FEDERAL", "DF");
+insert into estado values ("ESPIRITO SANTO", "ES");
+insert into estado values ("GOIAS", "GO");
+insert into estado values ("MARANHAO", "MA");
+insert into estado values ("MATO GROSSO", "MT");
+insert into estado values ("MATO GROSSO DO SUL", "MS");
+insert into estado values ("MINAS GERAIS", "MG");
+insert into estado values ("PARA", "PA");
+insert into estado values ("PARAIBA", "PB");
+insert into estado values ("PARANA", "PR");
+insert into estado values ("PERNAMBUCO", "PE");
+insert into estado values ("PIAUI", "PI");
+insert into estado values ("RIO DE JANEIRO", "RJ");
+insert into estado values ("RIO GRANDE DO NORTE", "RN");
+insert into estado values ("RIO GRANDE DO SUL", "RS");
+insert into estado values ("RONDONIA", "RO");
+insert into estado values ("RORAIMA", "RR");
+insert into estado values ("SANTA CATARINA", "SC");
+insert into estado values ("SAO PAULO", "SP");
+insert into estado values ("SERGIPE", "SE");
+insert into estado values ("TOCANTINS", "TO");
+
+CREATE TABLE regiao(
+	nome_regiao varchar(20) not null,
+	abreviacao varchar(3) not null,
+	constraint primary key (abreviacao),
+	foreign key (abreviacao) references estado(abreviacao)
+);
+
+select * from regiao;
+insert into regiao values ("NORTE", "AP");
+insert into regiao values ("NORTE", "AC");
+insert into regiao values ("NORTE", "AM");
+insert into regiao values ("NORTE", "PA");
+insert into regiao values ("NORTE", "RO");
+insert into regiao values ("NORTE", "RR");
+insert into regiao values ("NORTE", "TO");
+insert into regiao values ("NORDESTE", "AL");
+insert into regiao values ("NORDESTE", "BA");
+insert into regiao values ("NORDESTE", "CE");
+insert into regiao values ("NORDESTE", "MA");
+insert into regiao values ("NORDESTE", "PB");
+insert into regiao values ("NORDESTE", "PE");
+insert into regiao values ("NORDESTE", "PI");
+insert into regiao values ("NORDESTE", "SE");
+insert into regiao values ("NORDESTE", "RN");
+insert into regiao values ("CENTROESTE", "GO");
+insert into regiao values ("CENTROESTE", "MT");
+insert into regiao values ("CENTROESTE", "MS");
+insert into regiao values ("CENTROESTE", "DF");
+insert into regiao values ("SUDESTE", "MG");
+insert into regiao values ("SUDESTE", "ES");
+insert into regiao values ("SUDESTE", "RJ");
+insert into regiao values ("SUDESTE", "SP");
+insert into regiao values ("SUL", "SC");
+insert into regiao values ("SUL", "RS");
+insert into regiao values ("SUL", "PR");
