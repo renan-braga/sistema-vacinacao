@@ -38,6 +38,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import br.edu.ifsp.controller.UsuarioController;
+import br.edu.ifsp.controller.VacinaUsuarioController;
 import br.edu.ifsp.dao.UsuarioDAO;
 import br.edu.ifsp.dao.VacinaUsuarioDAO;
 import br.edu.ifsp.dto.VacinaDTO;
@@ -48,8 +50,8 @@ public class TelaVacina extends JFrame {
 	private static final long serialVersionUID = 1L;
 	Usuario u = new Usuario();
 	VacinaUsuario vacinaUsuario = new VacinaUsuario();
-	UsuarioDAO usuarioDAO = new UsuarioDAO();
-	VacinaUsuarioDAO vacinaUsuarioDAO = new VacinaUsuarioDAO();
+	UsuarioController usuarioController = new UsuarioController();
+	VacinaUsuarioController vacinaUsuarioController = new VacinaUsuarioController();
 	DateTimeFormatter parser = DateTimeFormatter.ofPattern("dd/MM/uuuu");
 	
 	private JFormattedTextField areaCPFAplicarVacina;
@@ -162,7 +164,7 @@ public class TelaVacina extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				String consutaCpf = areaCPFAplicarVacina.getText();
-				u = usuarioDAO.consultarUsuarioCPF(consutaCpf);
+				u = usuarioController.consultarUsuarioCPF(consutaCpf);
 				lblNomeAplicarVacina.setText(u.getNome());
 				;
 
@@ -261,9 +263,14 @@ public class TelaVacina extends JFrame {
 		jTabbedPane1.addTab("HISTÓRICO VACINAÇÃO", jScrollPane1);
 
 		jTable2.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null, null, null, null },
-						{ null, null, null, null, null, null, null }, { null, null, null, null, null, null, null },
-						{ null, null, null, null, null, null, null } },
+				new Object[][] 
+					{ 
+						{ null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null }, 
+						{ null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null }
+					}
+				,
 				new String[] { "NOME", "CPF", "SEXO", "IMUNOBIOLÓGICO", "UF-APLICAÇÃO", "DATA DE APLICAÇÃO",
 						"PRÓXIMA APLICAÇÃO" }) {
 			private static final long serialVersionUID = 1L;
@@ -283,7 +290,7 @@ public class TelaVacina extends JFrame {
 				.addGroup(GroupLayout.Alignment.TRAILING,
 						jPanel2Layout.createSequentialGroup()
 								.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jTabbedPane1, GroupLayout.PREFERRED_SIZE, 907,
+								.addComponent(jTabbedPane1, GroupLayout.PREFERRED_SIZE, 1000,
 										GroupLayout.PREFERRED_SIZE)
 								.addContainerGap()));
 		jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -339,7 +346,7 @@ public class TelaVacina extends JFrame {
 		System.out.println(vacinaUsuario.getDtaplicacao());
 		System.out.println(vacinaUsuario.getDtproximaaplicacao());
 		vacinaUsuario.setUfaplicacao(jComboBoxUFAplicarVacina.getSelectedItem().toString());
-		vacinaUsuarioDAO.aplicarVacinaUsuario(vacinaUsuario);
+		vacinaUsuarioController.aplicarVacinaUsuario(vacinaUsuario);
 		
 		listarValores();
 	}
@@ -348,7 +355,7 @@ public class TelaVacina extends JFrame {
 		try {
 			DefaultTableModel model = (DefaultTableModel) tabelaVacina.getModel();
 			model.setNumRows(0);
-			ArrayList<VacinaDTO> lista = vacinaUsuarioDAO.pesquisarVacina(areaCPFAplicarVacina.getText());
+			ArrayList<VacinaDTO> lista = vacinaUsuarioController.pesquisarVacina(areaCPFAplicarVacina.getText());
 			DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 			for (int num = 0; num < lista.size(); num++) {

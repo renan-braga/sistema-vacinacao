@@ -17,6 +17,12 @@ create table usuario(
  	estado varchar(10) not null,
  	constraint cpf primary key (cpf)
   );
+  
+  CREATE TABLE estado(
+	nome_estado varchar(20) not null,
+	abreviacao varchar(3) not null,
+	constraint primary key (abreviacao)
+);
 
 -- POPULANDO TABELA - USUÁRIO
 INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Vitor Francisco Lima",12,"HOMEM","486.626.781-06","AC");
@@ -69,12 +75,8 @@ INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Fernando Cauã
 INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Maria Isabel Bárbara Fernandes",23,"MULHER","410.785.737-94","DF");
 INSERT INTO usuario (nomeCompleto,idade,sexo,cpf,estado) VALUES ("Igor Tomás José Barbosa",21,"HOMEM","596.125.415-15","DF");
 
-CREATE TABLE estado(
-	nome_estado varchar(20) not null,
-	abreviacao varchar(3) not null,
-	constraint primary key (abreviacao)
-);
 
+-- POPULAR TABELA ESTADO
 insert into estado values ("RIO GRANDE DO NORTE", "RN");
 insert into estado values ("ACRE", "AC");
 insert into estado values ("ALAGOAS", "AL");
@@ -104,13 +106,7 @@ insert into estado values ("SAO PAULO", "SP");
 insert into estado values ("SERGIPE", "SE");
 insert into estado values ("TOCANTINS", "TO");
 
-CREATE TABLE regiao(
-	nome_regiao varchar(20) not null,
-	abreviacao varchar(3) not null,
-	constraint primary key (abreviacao),
-	foreign key (abreviacao) references estado(abreviacao)
-);
-
+-- POPULAR TABELA REGIÃO
 select * from regiao;
 insert into regiao values ("NORTE", "AP");
 insert into regiao values ("NORTE", "AC");

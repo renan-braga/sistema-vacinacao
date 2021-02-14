@@ -18,6 +18,7 @@ import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import br.edu.ifsp.controller.VacinaUsuarioController;
 import br.edu.ifsp.dao.VacinaUsuarioDAO;
 import br.edu.ifsp.dto.HistoricoRegiaoDTO;
 
@@ -30,7 +31,6 @@ public class TelaHistorico extends JFrame {
     private JPanel jPanel2;
     private JScrollPane jScrollPane1;
     private JTable tabelaHistorico;
-    private VacinaUsuarioDAO vacinaUsuarioDAO;
  
 	private static final long serialVersionUID = 1L;
 	public TelaHistorico() {
@@ -39,7 +39,6 @@ public class TelaHistorico extends JFrame {
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-    	vacinaUsuarioDAO = new VacinaUsuarioDAO();
         jFrame1 = new JFrame();
         jScrollPane1 = new JScrollPane();
         tabelaHistorico = new JTable();
@@ -166,7 +165,9 @@ public class TelaHistorico extends JFrame {
 
     private void btnListarHistoricoActionPerformed(ActionEvent evt) {
     	String imunobiologico = jComboBoxImunobiologico.getSelectedItem().toString();
-		ArrayList<HistoricoRegiaoDTO> historico = vacinaUsuarioDAO.listarHistorico(imunobiologico);
+    	VacinaUsuarioController vacinaUsuarioController = new VacinaUsuarioController();
+    	vacinaUsuarioController.listarHistorico(imunobiologico);
+		ArrayList<HistoricoRegiaoDTO> historico = vacinaUsuarioController.listarHistorico(imunobiologico);
     	listarValores(historico);
     }
 

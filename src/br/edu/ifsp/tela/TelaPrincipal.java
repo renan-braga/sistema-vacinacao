@@ -20,7 +20,6 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.OverlayLayout;
 import javax.swing.UIManager;
@@ -29,7 +28,11 @@ import javax.swing.WindowConstants;
 
 public class TelaPrincipal extends JFrame {
 
-    private JCheckBoxMenuItem jCheckBoxMenuItem1;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JCheckBoxMenuItem jCheckBoxMenuItem1;
     private JFrame jFrame1;
     private JInternalFrame jInternalFrame2;
     private JLabel jLabel1;
@@ -41,20 +44,16 @@ public class TelaPrincipal extends JFrame {
     private JMenuItem itemGerenciarPaciente;
     private JMenuItem itemEstatisticas;
     private JMenuItem itemAplicarVacina;
-    private JPopupMenu jPopupMenu1;
    
     public TelaPrincipal() {
-        initComponents();
+        initComponents(); 	
     }
 
    
-    @SuppressWarnings("unchecked")
     private void initComponents() {
-    	
         jFrame1 = new JFrame();
         jMenu1 = new JMenu();
         jCheckBoxMenuItem1 = new JCheckBoxMenuItem();
-        jPopupMenu1 = new JPopupMenu();
         jInternalFrame2 = new JInternalFrame();
         jLabel1 = new JLabel();
         String path = FileSystems.getDefault().getPath("").toAbsolutePath()+""+File.separatorChar+"sus-background.jpg";

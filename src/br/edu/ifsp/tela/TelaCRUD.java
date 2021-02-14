@@ -1,5 +1,6 @@
 package br.edu.ifsp.tela;
 
+import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -29,13 +30,77 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import br.edu.ifsp.controller.UsuarioController;
 import br.edu.ifsp.dao.UsuarioDAO;
 import br.edu.ifsp.modelo.Usuario;
 
 public class TelaCRUD extends JFrame {
+	
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JFormattedTextField areaCPFAtualizar;
+    private JFormattedTextField areaCPFCadastar;
+    private JFormattedTextField areaCPFRemover;
+    private JTextField areaNomeAtualizar;
+    private JTextField areaNomeCadastar;
+    private JButton btnAtualizar;
+    private JButton btnCadastrarUsuario;
+    private JButton btnConsultarCPFRemover;
+    private JButton btnRemover;
+    private ButtonGroup buttonGroup1;
+    private ButtonGroup buttonGroup2;
+    private JComboBox<String> jComboBoxUFAtualizar;
+    private JComboBox<String> jComboBoxUFCadastar;
+    private JLabel jLabel1;
+    private JLabel jLabel18;
+    private JLabel jLabel19;
+    private JLabel jLabel2;
+    private JLabel jLabel21;
+    private JLabel jLabel22;
+    private JLabel jLabel23;
+    private JLabel jLabel24;
+    private JLabel jLabel27;
+    private JLabel jLabel28;
+    private JLabel jLabel3;
+    private JLabel jLabel30;
+    private JLabel jLabel31;
+    private JLabel jLabel32;
+    private JLabel jLabel33;
+    private JLabel jLabel4;
+    private JLabel jLabel5;
+    private JLabel jLabel6;
+    private JLabel jLabel64;
+    private JLabel jLabel69;
+    private JLabel jLabel7;
+    private JPanel jPanel1;
+    private JPanel jPanel12;
+    private JPanel jPanel2;
+    private JPanel jPanel3;
+    private JPanel jPanel7;
+    private JPanel jPanel8;
+    private JScrollPane jScrollPane1;
+    private JTabbedPane jTabbedAtualizar;
+    private JLabel lblEstadoRemover;
+    private JLabel lblFaixaRemover;
+    private JLabel lblIdadeRemover;
+    private JButton lblLimparCadastar;
+    private JButton lblLimparRemover;
+    private JLabel lblNomeRemover;
+    private JLabel lblSexoRemover;
+    private JButton limparAtualizar;
+    private JPanel pnDadosRemover;
+    private JPanel pnLista;
+    private JRadioButton radioHomemAtualizar;
+    private JRadioButton radioHomemCadastar;
+    private JRadioButton radioMulherAtualizar;
+    private JRadioButton radioMulherCadastar;
+    private JTable tabelTodosUsuarios;
+    private javax.swing.JSpinner txtDataAtualizar;
+    private javax.swing.JSpinner txtDataCadastrar;
+	private javax.swing.SpinnerDateModel modelAtualizar;
+	private SpinnerDateModel modelCadastrar;
 
     Usuario u = new Usuario();
-    UsuarioDAO ud = new UsuarioDAO();
+    UsuarioController usuarioController = new UsuarioController();
     DateTimeFormatter parser = DateTimeFormatter.ofPattern("dd/MM/uuuu");
     Calendar c = Calendar.getInstance();
 
@@ -52,8 +117,6 @@ public class TelaCRUD extends JFrame {
         buttonGroup1 = new ButtonGroup();
         buttonGroup2 = new ButtonGroup();
         jPanel2 = new JPanel();
-        buttonGroup3 = new ButtonGroup();
-        buttonGroup4 = new ButtonGroup();
         jTabbedAtualizar = new JTabbedPane();
         jPanel1 = new JPanel();
         jPanel7 = new JPanel();
@@ -298,21 +361,21 @@ public class TelaCRUD extends JFrame {
 
         jLabel4.setText("FAIXA");
 
-        lblNomeRemover.setText("XXXXXXXXXXXXXX");
+        lblNomeRemover.setText("");
 
-        lblFaixaRemover.setText("YYYYYYYYYYYYYY");
+        lblFaixaRemover.setText("");
 
         jLabel5.setText("IDADE");
 
-        lblIdadeRemover.setText("AAAAAAAAAAAA");
+        lblIdadeRemover.setText("");
 
         jLabel6.setText("SEXO");
 
-        lblSexoRemover.setText("BBBBBBBBBBBBBB");
+        lblSexoRemover.setText("");
 
         jLabel7.setText("UF");
 
-        lblEstadoRemover.setText("PPPPPPPPPPPPPP");
+        lblEstadoRemover.setText("");
 
         GroupLayout pnDadosRemoverLayout = new GroupLayout(pnDadosRemover);
         pnDadosRemover.setLayout(pnDadosRemoverLayout);
@@ -551,7 +614,11 @@ public class TelaCRUD extends JFrame {
                 "NOME", "CPF", "SEXO", "IDADE", "UF"
             }
         ) {
-            Class[] types = new Class [] {
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+			Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
 
@@ -626,16 +693,16 @@ public class TelaCRUD extends JFrame {
         areaNomeCadastar.setText(null);
         jComboBoxUFCadastar.setSelectedIndex(0);
 
-    }//GEN-LAST:event_lblLimparCadastarActionPerformed
+    }
 
-    private void lblLimparRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblLimparRemoverActionPerformed
+    private void lblLimparRemoverActionPerformed(java.awt.event.ActionEvent evt) {
         areaCPFRemover.setText(null);
         lblNomeRemover.setText(null);
         lblFaixaRemover.setText(null);
         lblIdadeRemover.setText(null);
         lblSexoRemover.setText(null);
         lblEstadoRemover.setText(null);
-    }//GEN-LAST:event_lblLimparRemoverActionPerformed
+    }
 
     public void atualizarGrid() {
 
@@ -648,7 +715,7 @@ public class TelaCRUD extends JFrame {
         tabelTodosUsuarios.getColumnModel().getColumn(3);
         tabelTodosUsuarios.getColumnModel().getColumn(4);
         try {
-            for (Usuario p : ud.consultarTodos()) {
+            for (Usuario p : usuarioController.consultarTodos()) {
                 modelo.addRow(new Object[]{
                     p.getNome(),
                     p.getCPF(),
@@ -683,12 +750,21 @@ public class TelaCRUD extends JFrame {
         u.setCPF(flagCPF);
         u.setEstado(flagEstado);
 
-        ud.cadastrarUsuario(u);
+        usuarioController.cadastrarUsuario(u);
         atualizarGrid();
+        limparCastrar();
     }//GEN-LAST:event_btnCadastrarUsuarioActionPerformed
 
     
-    private int calcularIdade(Date flagDataNascimento) {
+    private void limparCastrar() {
+    	areaNomeCadastar.setText("");		
+    	areaCPFCadastar.setText("");
+    	txtDataCadastrar.setValue(new Date());
+    	radioHomemCadastar.setSelected(true);
+    	jComboBoxUFCadastar.setSelectedIndex(0);
+	}
+
+	private int calcularIdade(Date flagDataNascimento) {
     	Calendar agora = Calendar.getInstance();
     	agora.setTime(new Date());
     	Calendar nascimento = Calendar.getInstance();
@@ -696,38 +772,43 @@ public class TelaCRUD extends JFrame {
     	return agora.get(Calendar.YEAR) - nascimento.get(Calendar.YEAR);
     }
 
-	private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+	private void btnRemoverActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         String flagCPF = areaCPFRemover.getText();
 
         u.setCPF(flagCPF);
-        ud.removerUsuarioCPF(u);
+        usuarioController.removerUsuarioCPF(u);
 
         atualizarGrid();
+        limparRemover();
     }//GEN-LAST:event_btnRemoverActionPerformed
 
-    private void btnConsultarCPFRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarCPFRemoverActionPerformed
+    private void btnConsultarCPFRemoverActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnConsultarCPFRemoverActionPerformed
         String flagCPF = areaCPFRemover.getText();
 
+        u = usuarioController.consultarUsuarioCPF(flagCPF);
+
         String faixa;
-        int idade = 75;
+        int idade = u.getIdade();
 
         if (idade >= 0 && idade < 14) {
             faixa = "CRIANÇA";
         } else if (idade >= 14 && idade < 18) {
             faixa = "ADOLESCENTE";
         } else if (idade >= 18 && idade < 60) {
-            faixa = "ADAULTO";
+            faixa = "ADULTO";
         } else {
             faixa = "IDOSO";
         }
 
-        u = ud.consultarUsuarioCPF(flagCPF);
         lblNomeRemover.setText(u.getNome());
         lblIdadeRemover.setText("" + u.getIdade());
         lblSexoRemover.setText(u.getSexo());
         lblEstadoRemover.setText(u.getEstado());
         lblFaixaRemover.setText(faixa);
         atualizarGrid();
+        if(u.getCPF() == null){
+        	limparRemover();
+        }
     }
     private void limparAtualizarActionPerformed(java.awt.event.ActionEvent evt) {
 
@@ -764,9 +845,17 @@ public class TelaCRUD extends JFrame {
         u.setCPF(flagCPF);
         u.setEstado(flagEstado);
 
-        ud.updateUsuarioCPF(u);
+        usuarioController.updateUsuarioCPF(u);
         atualizarGrid();
-    }//GEN-LAST:event_btnAtualizarActionPerformed
+    }
+    
+    public void limparRemover() {
+        lblNomeRemover.setText("");
+        lblFaixaRemover.setText("");
+        lblIdadeRemover.setText("");
+        lblSexoRemover.setText("");
+        lblEstadoRemover.setText("");
+    }
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -781,69 +870,5 @@ public class TelaCRUD extends JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JFormattedTextField areaCPFAtualizar;
-    private JFormattedTextField areaCPFCadastar;
-    private JFormattedTextField areaCPFRemover;
-    private JTextField areaNomeAtualizar;
-    private JTextField areaNomeCadastar;
-    private JButton btnAtualizar;
-    private JButton btnCadastrarUsuario;
-    private JButton btnConsultarCPFRemover;
-    private JButton btnRemover;
-    private ButtonGroup buttonGroup1;
-    private ButtonGroup buttonGroup2;
-    private ButtonGroup buttonGroup3;
-    private ButtonGroup buttonGroup4;
-    private JComboBox<String> jComboBoxUFAtualizar;
-    private JComboBox<String> jComboBoxUFCadastar;
-    private JLabel jLabel1;
-    private JLabel jLabel18;
-    private JLabel jLabel19;
-    private JLabel jLabel2;
-    private JLabel jLabel21;
-    private JLabel jLabel22;
-    private JLabel jLabel23;
-    private JLabel jLabel24;
-    private JLabel jLabel27;
-    private JLabel jLabel28;
-    private JLabel jLabel3;
-    private JLabel jLabel30;
-    private JLabel jLabel31;
-    private JLabel jLabel32;
-    private JLabel jLabel33;
-    private JLabel jLabel4;
-    private JLabel jLabel5;
-    private JLabel jLabel6;
-    private JLabel jLabel64;
-    private JLabel jLabel69;
-    private JLabel jLabel7;
-    private JPanel jPanel1;
-    private JPanel jPanel12;
-    private JPanel jPanel2;
-    private JPanel jPanel3;
-    private JPanel jPanel7;
-    private JPanel jPanel8;
-    private JScrollPane jScrollPane1;
-    private JTabbedPane jTabbedAtualizar;
-    private JLabel lblEstadoRemover;
-    private JLabel lblFaixaRemover;
-    private JLabel lblIdadeRemover;
-    private JButton lblLimparCadastar;
-    private JButton lblLimparRemover;
-    private JLabel lblNomeRemover;
-    private JLabel lblSexoRemover;
-    private JButton limparAtualizar;
-    private JPanel pnDadosRemover;
-    private JPanel pnLista;
-    private JRadioButton radioHomemAtualizar;
-    private JRadioButton radioHomemCadastar;
-    private JRadioButton radioMulherAtualizar;
-    private JRadioButton radioMulherCadastar;
-    private JTable tabelTodosUsuarios;
-    private javax.swing.JSpinner txtDataAtualizar;
-    private javax.swing.JSpinner txtDataCadastrar;
-    // End of variables declaration//GEN-END:variables
-	private javax.swing.SpinnerDateModel modelAtualizar;
-	private SpinnerDateModel modelCadastrar;
+
 }
