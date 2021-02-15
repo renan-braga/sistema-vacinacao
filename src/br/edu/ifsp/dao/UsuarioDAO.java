@@ -36,11 +36,11 @@ public class UsuarioDAO {
 			pstm.executeUpdate();
 
 			System.out.println("Usuário inserido!!");
-			JOptionPane.showMessageDialog(null, "Usuário inserida");
+			JOptionPane.showMessageDialog(null, "Usuário inserido");
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			System.err.println("Erro,ao inserir um usuário");
-			JOptionPane.showMessageDialog(null, "Usuário inserida");
+			JOptionPane.showMessageDialog(null, "Erro ao inserir um usuário");
 			e.printStackTrace();
 		}
 	}
