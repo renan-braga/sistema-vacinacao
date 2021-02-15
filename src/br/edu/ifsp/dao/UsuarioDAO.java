@@ -82,7 +82,7 @@ public class UsuarioDAO {
 			pstm.executeUpdate();
 
 			System.out.println("Usuário removido com sucesso");
-			JOptionPane.showMessageDialog(null, "Usuário removida com sucesso");
+			JOptionPane.showMessageDialog(null, "Usuário removido com sucesso");
 
 		} catch (SQLException e) {
 			System.out.println("Erro! Remoção negada");
@@ -106,7 +106,7 @@ public class UsuarioDAO {
 			pstm.executeUpdate();
 
 			System.out.println("Usuário atualizada com sucesso");
-			JOptionPane.showMessageDialog(null, "Usuário atualizada com sucesso");
+			JOptionPane.showMessageDialog(null, "Usuário atualizado com sucesso");
 
 		} catch (SQLException e) {
 			System.out.println("Erro! Atualização negada");
